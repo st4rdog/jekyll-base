@@ -1,5 +1,5 @@
 # Site settings
-title: Your awesome title
+title: Site Title
 email: your-email@domain.com
 description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
@@ -12,3 +12,35 @@ github_username:  jekyll
 
 # Build settings
 markdown: kramdown
+
+collections:
+  tutorials:
+    output: true
+    permalink: /tutorial/:path/
+  movies:
+    output: true
+    permalink: /movie/:path/
+  movie-reviews:
+    output: true
+    permalink: /review/:path/
+  authors:
+    output: true
+    permalink: /author/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: movie-reviews
+    values:
+      layout: entry
+      titlepre: "Review: "
+  - scope:
+      path: ""
+      type: movies
+    values:
+      layout: entry
+  - scope:
+      path: ""
+      type: authors
+    values:
+      layout: entry
