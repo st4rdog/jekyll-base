@@ -1,5 +1,7 @@
 ---
 title:  "The Matrix"
 id: mTheMatrix
+releasedate: 1999-06-11
 ---
-The Matrix movie page.
+
+{{ page.title }} movie page.

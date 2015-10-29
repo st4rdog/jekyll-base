@@ -1,66 +1,85 @@
 ---
-layout: default
+layout: main
 ---
 
-<div class="home">
+<main>
 
-	<h1 class="page-heading">Posts</h1>
-
-	<ul class="post-list">
-
-		{% for post in site.posts %}
-		<li>
-			<span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-			<h2>
-				<a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-			</h2>
-		</li>
-		{% endfor %}
-
-	</ul>
-
-	<h1 class="page-heading">Tutorials</h1>
-
-	{% for tutorial in site.tutorials %}
-	<ul class="post-list">
-		<li>
-			<h2>
-				<a class="post-link" href="{{ tutorial.url | prepend: site.baseurl }}">{{ tutorial.title }} | {{ tutorial.testertext }}</a>
-			</h2>
-		</li>
-	</ul>
-	{% endfor %}
+	<div class="grid-container">
 	
-	<h1 class="page-heading">Movies</h1>
+		<div class="grid-100">
 
-	{% for item in site.movies %}
-	<ul class="post-list">
-		<li>
-			<h2><a class="post-link" href="{{ item.url | prepend: site.baseurl }}">{{ item.title }}</a></h2>
-			<br/>
-			{% for review in site.movie-reviews %}
-			{% if review.rel-movie-id == item.id %}
-			<a href="{{ review.url | prepend: site.baseurl }}">{{ item.titlepre }}{{ review.title }}</a>
-			{% endif %}
-			{% endfor %}
-		</li>
-		
-	</ul>
-	{% endfor %}
+			<section>
+				<h1>Blog Posts</h1>
+				<ul>
+					{% for i in site.posts %}
+					<li>
+						<a href="{{ i.url | prepend: site.baseurl }}">{{ i.title }} ({{ i.date | date: "%b %-d, %Y" }})</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</section>
+			
+			<section>
+				<h1>News (sorted newest first)</h1>
+				<ul>
+					{% assign sorted-news = site.news | sort:"date" | reverse %}
+					{% for i in sorted-news %}
+					<li>
+						<a href="{{ i.url | prepend: site.baseurl }}">{{ i.title }} ({{ i.date | date: "%b %-d, %Y" }})</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</section>
+			
+		</div>
 
-	<h1 class="page-heading">Movie Reviews</h1>
+		<div class="grid-50">
+			<section>
+				<h1>Movie Reviews</h1>
+				<ul>
+					{% for i in site.movie-reviews %}
+					<li>
+						<a href="{{ i.url | prepend: site.baseurl }}">{{ i.title }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</section>
+		</div>
 
-	{% for item in site.movie-reviews %}
-	<ul class="post-list">
-		<li>
-			<h2>
-				<a class="post-link" href="{{ item.url | prepend: site.baseurl }}">{{ item.titlepre }}{{ item.title }}</a>
-			</h2>
-		</li>
-	</ul>
-	{% endfor %}
+		<div class="grid-50">
+			<section>
+				<h1>Movies (sorted by releasedate)</h1>
+				<ul>
+					{% assign sorted-movies = site.movies | sort:"releasedate" %}
+					{% for movie in sorted-movies %}
+					<li>
+						<a href="{{ movie.url | prepend: site.baseurl }}">{{ movie.title }} ({{ movie.releasedate | date: "%Y" }})</a>
+						{% for review in site.movie-reviews %}
+							{% if review.rel-movie-id %}
+							{% if review.rel-movie-id == movie.id %}
+								(<a href="{{ review.url | prepend: site.baseurl }}">{{ review.titlepre }}{{ review.title }}</a>)
+							{% endif %}
+							{% endif %}
+						{% endfor %}
+					</li>
+					{% endfor %}
+				</ul>
+			</section>
+		</div>
 
-	<p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+		<div class="grid-100">
+			<section>
+				<h1>Authors</h1>
+				<ul>
+					{% for i in site.authors %}
+					<li>
+						<a href="{{ i.url | prepend: site.baseurl }}">{{ i.name }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</section>
+		</div>
+	
+	</div>
 
-</div>
+</main>

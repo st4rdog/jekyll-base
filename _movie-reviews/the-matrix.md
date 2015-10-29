@@ -5,4 +5,4 @@ id: rTheMatrix
 rel-movie-id: mTheMatrix
 rel-author-id: aStardog
 ---
-Here's my review of The Matrix. It was awesome. {{ page.rating }}/10
+Here's my review of {{ page.title }}. It was awesome. {{ page.rating }}/10

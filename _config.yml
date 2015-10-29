@@ -1,22 +1,22 @@
 # Site settings
 title: Site Title
 email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
+description: > # this means ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
 
-# Build settings
+# url: "http://localhost:4000"
+# url: "http://st4rdog.github.io"
+url: "http://yourdomain.com"
+
 markdown: kramdown
 
 collections:
-  tutorials:
+  news:
     output: true
-    permalink: /tutorial/:path/
+    permalink: /news/:path/
   movies:
     output: true
     permalink: /movie/:path/
@@ -26,21 +26,39 @@ collections:
   authors:
     output: true
     permalink: /author/:path/
+  directors:
+    output: true
+    permalink: /directors/:path/
 
 defaults:
   - scope:
       path: ""
-      type: movie-reviews
+      type: posts
     values:
-      layout: entry
-      titlepre: "Review: "
+      layout: single-post
+  - scope:
+      path: ""
+      type: news
+    values:
+      layout: single-generic
   - scope:
       path: ""
       type: movies
     values:
-      layout: entry
+      layout: single-generic
+  - scope:
+      path: ""
+      type: movie-reviews
+    values:
+      layout: single-generic
+      titlepre: "Review: "
   - scope:
       path: ""
       type: authors
     values:
-      layout: entry
+      layout: single-author
+  - scope:
+      path: ""
+      type: directors
+    values:
+      layout: single-generic
